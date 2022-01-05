@@ -1,4 +1,5 @@
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Home, Message, Room, SignIn } from "./page";
 
