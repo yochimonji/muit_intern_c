@@ -16,11 +16,11 @@ const Message = () => {
 
     return (
         <Container>
-            {messageList &&
+            {
                 messageList.map((message, index) => 
-                    <Stack gap={5} key={index}>
+                    <Stack gap={5} key={index} className="pb-2">
                         <div>{message.userid}</div>
-                        <div>{message.text}</div>
+                        <div className="bg-light p-2 rounded border">{message.text}</div>
                     </Stack>
                 )
             }
