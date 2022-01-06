@@ -3,6 +3,7 @@ import { Container, Stack } from "react-bootstrap";
 
 const Message = () => {
     const [messageList, setMessageList] = useState([]);
+    const currentUserId = "userA";
 
     useEffect(()=>{
         const newMessageList = [
@@ -18,9 +19,18 @@ const Message = () => {
         <Container>
             {
                 messageList.map((message, index) => 
-                    <Stack gap={5} key={index} className="pb-2">
-                        <div>{message.userid}</div>
-                        <div className="bg-light p-2 rounded border">{message.text}</div>
+                    message.userid === currentUserId ?
+                    <Stack key={index} className="pb-2">
+                        <div className="justify-content-end d-flex pb-1">{message.userid}</div>
+                        <div className="d-flex justify-content-end">
+                            <div className="bg-dark text-light rounded border p-2">{message.text}</div>
+                        </div>
+                    </Stack> :
+                    <Stack key={index} className="pb-3">
+                        <div className="pb-1">{message.userid}</div>
+                        <div className="d-flex">
+                            <div className="bg-light rounded border p-2">{message.text}</div>
+                        </div>
                     </Stack>
                 )
             }
