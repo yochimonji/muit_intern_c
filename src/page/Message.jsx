@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Container, FormControl, InputGroup, Stack } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
+import { MessageList, MessageSubmit } from "../components";
 
 const Message = () => {
     const [messageList, setMessageList] = useState([]);
@@ -31,31 +33,8 @@ const Message = () => {
 
     return (
         <Container>
-            {
-                messageList.map((message, index) => 
-                    message.userid === currentUserId ?
-                    <Stack key={index} className="pb-2">
-                        <div className="justify-content-end d-flex pb-1">{message.userid}</div>
-                        <div className="d-flex justify-content-end">
-                            <div className="bg-dark text-light rounded border p-2">{message.text}</div>
-                        </div>
-                    </Stack> :
-                    <Stack key={index} className="pb-3">
-                        <div className="pb-1">{message.userid}</div>
-                        <div className="d-flex">
-                            <div className="bg-light rounded border p-2">{message.text}</div>
-                        </div>
-                    </Stack>
-                )
-            }
-            <Container className="fixed-bottom bg-white">
-                <InputGroup className="mb-2">
-                    <FormControl className="mr-2" value={text} onChange={(e) => setText(e.target.value)}/>
-                    <Button variant="outline-secondary" onClick={submitText}>
-                        送信
-                    </Button>
-                </InputGroup>
-            </Container>
+            <MessageList messageList={messageList} currentUserId={currentUserId} />
+            <MessageSubmit text={text} setText={setText} submitText={submitText} />
         </Container>
     )
 }
