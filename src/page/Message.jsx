@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
 import { MessageList, MessageSubmit } from "../components";
+import API from '../api'
 
 const Message = () => {
     const [messageList, setMessageList] = useState([]);
@@ -9,16 +10,20 @@ const Message = () => {
 
     // 現在のユーザーをuseContextを使用する
     const currentUserId = "userA";
+    // RoomIDは遷移元から取得する
+    const roomId = 1;
 
     useEffect(()=>{
-        // APIからメッセージ一覧を取得する処理に変更する
-        const newMessageList = [
-            { "text": "こんにちは", "userid": "userA" },
-            { "text": "こんにちは", "userid": "userB" },
-            { "text": "よろしくお願いします〜!", "userid": "userA" },
-            { "text": "(^-^)", "userid": "userB" },
-        ]
-        setMessageList(newMessageList)
+        (async () => {
+            const response = await API.post(`/${roomId}/message`, {
+                "OperationType": "QUERY",
+                "Keys": {
+                    "roomid": roomId
+                }
+            })
+            const newMessageList = [...response.data.Items]
+            setMessageList(newMessageList)
+        })();
     }, [])
 
     const submitText = () => {
