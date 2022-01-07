@@ -1,12 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import Stack from 'react-bootstrap/Stack';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+//import Card from 'react-bootstrap/Card';
+
+import { Button, Navbar, Stack, Container, Card, Form, FormControl, Row, Col, ListGroup, ListGroupItem, Nav, NavDropdown } from 'react-bootstrap';
+
 
 
 const Home = () => {
@@ -14,34 +10,54 @@ const Home = () => {
     //return <h2>{to_json[0].sentence}</h2>   //to_json[0].sentence　もしくは　to_json[0]['sentense']で可能
 
     var list = [];
-    const newtrim = '.trim1{background-image:url("/manyfriends.jpg");}'
 
-    list.push(<style>{cardspace}}</style>);
-    list.push(<style>{iconcss}{inline}{marginB}</style>);
+    list.push(<style>{inline}{marginB}</style>);//{iconcss}
 
-    //list.push(<style>{inline}</style>);
-    //list.push(<div class="trim"><img src={"/manyfriends.jpg"} alt={''} /></div>);
+    var bgcss = 'body {background-image: url("/defaltback.jpg");background-size: cover;background-attachment: fixed;}';
 
-    list.push(<style>{newtrim}</style>);
-    //list.push(<style>{face1}</style>);
-    //list.push(<p class="trim trim1 inline" />);
-    //テスト
-
-    //for (var j = 0; j < 25; j++) {list.push((<style>${faces[j]}</style>));}
-    list.push(faceList());
-
-
-
-
-    var bgcss = 'body {background-image: url("/backgroundHome.jpg");background-size: cover;background-attachment: fixed;}';
-    //var csscont2 = "body" + '{' + `
-    //    background-image: url('/HomeBG.jpg');background-size: cover;}`;
-    list.push(<style>{bgcss}</style>);
+    list.push(<style>{bgcss}</style>);//壁紙の設定
     list.push(<style>{inputcss}</style>);
+    list.push(<><Bar /><ImgHeader path="/manyfriends.jpg" /></>)
+
+
+
+    //検索欄
+    list.push(
+
+        <span className="inline" >
+            <Form><Form.Control className='inputcss' type="email" placeholder="絞り込み" /></Form>
+            <Navbar bg="light" variant="light">
+                <Navbar.Brand>
+                    <Button variant="secondary">Submit</Button>
+                    <Button variant="outline-danger">Reset</Button>
+                </Navbar.Brand>
+            </Navbar>
+        </span>
+
+    );
+
+
+    //各投稿
+    var listB = getDatas.map((inf, num) => {
+        return <PostLists roomid={inf.roomid} title={inf.title} userid={inf.userid} date={inf.date} sentence={inf.sentence} num={num} />
+    });
 
     list.push(
+        <>{listB}</>)
+    return list
+}
+
+
+export default Home;
+
+//-------------------------------------------------------------------------------
+
+
+//ヘッダー
+function ImgHeader(props) {
+    return (
         <Card className="bg-dark text-white">
-            <Card.Img src="/manyfriends.jpg" alt="Card image" />
+            <Card.Img src={props.path} alt="Card image" />
             <Card.ImgOverlay>
                 <Card.Title>"出会い"を選びましょう</Card.Title>
                 <Card.Text>
@@ -52,109 +68,8 @@ const Home = () => {
             </Card.ImgOverlay>
         </Card>
     )
-
-
-
-    //var csscont3 = '.HT{display flex;}';//Cardにもなぜか小文字.cardが反映された。
-    //list.push(<style>{csscont3}</style>);
-
-    list.push(
-        <div className='marginB'>
-            <Navbar bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand href="#home">
-                        <img
-                            alt=""
-                            src="/logo192.png"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />{' '}
-                        MUIT APP
-                    </Navbar.Brand>
-                </Container>
-                <br></br>
-            </Navbar>
-        </div>
-
-    );
-
-
-
-    //検索欄
-    /*
-    list.push(
-
-        <span class="inline"><input class='HT' placeholder="絞り込み            " />
-            <Stack direction="horizontal" gap={2}>
-                <Button class='HT' variant="secondary">Submit</Button>
-                <div class='HT' className="vr" />
-                <Button class='HT' variant="outline-danger">Reset</Button>
-            </Stack></span>
-    );
-    */
-
-
-    //検索欄
-    list.push(
-        <span class="inline">
-            <Form><Form.Control class='inputcss' type="email" placeholder="絞り込み" /></Form>
-            <Button class='HT' variant="secondary">Submit</Button>
-            <Button class='HT' variant="outline-danger">Reset</Button>
-        </span>
-    );
-
-
-    /*スマホ版でボタンが2つ入りきらない
-        list.push(
-            <span class="inline">
-                <input class="inputcss" type="text" placeholder="絞り込み" />
-                <Button class='HT' variant="secondary">Submit</Button>
-                <Button class='HT' variant="outline-danger">Reset</Button>
-            </span>
-        );
-        */
-
-
-    //各投稿
-    //face()trim1 trim inline
-    for (var i in to_json) {
-        list.push(
-            <div className='marginB'>
-                <Card>
-
-                    <Card.Body>
-
-                        <button class={setClassName(i)} /><Card.Text class="inline">ID:{to_json[i].userID}</Card.Text>
-                        <Card.Title>{to_json[i].title}</Card.Title>
-                        <Row>
-                            <Col>
-                                <Card.Text class="inline">日時:{to_json[i].date}</Card.Text>
-                            </Col>
-                            <Col xs={6}>
-                                <Button class="inline" variant='outline-primary'>詳しく見る</Button>
-                            </Col>
-                        </Row>
-                    </Card.Body>
-
-                </Card>
-            </div>
-        );
-    }//<Card.Text>内容:{to_json[i].sentence}投稿者:{to_json[i].userID}</Card.Text>
-    //<Card.Header>{to_json[i].title}</Card.Header>
-    return list
 }
 
-export default Home;
-
-const to_json = [
-    { 'roomid': "01", "userID": "user1", "date": "date1", "title": "記事1", "sentence": "中身１" },
-    { 'roomid': "02", "userID": "user2", "date": "date2", "title": "記事2", "sentence": "中身2" },
-    { 'roomid': "03", "userID": "user3", "date": "date3", "title": "記事3", "sentence": "中身3" },
-    { 'roomid': "04", "userID": "user4", "date": "date4", "title": "記事4", "sentence": "中身4" },
-
-]
-const cardspace = '.card{margin-bottom:30px;}';//Cardにもなぜか小文字.cardが反映された。
 const marginB = '.marginB{margin-bottom:30px;}';
 
 const inline = ".inline" + '{' + `
@@ -171,78 +86,93 @@ const inputcss = ".inputcss" + '{' + `
     box-sizing: border-box;
 }`;
 
-//width: 60%; 
 
-//inlineも内蔵
-const iconcss = "button.icon" + '{' + `
-    width:  64px;  
-    height: 64px; 
-    border-radius: 50%;
-    background-position: left top; 
-    display:inline
-}`
-
-//const newtrim = '.trim1{background-image:url("/manyfriends.jpg");}'
-const k = 1;
-//const face1 = '.face1{background-image:url("/icons/' + { k } + '.JPG");}'
-//const face1 = '.face1{background-image:url("/icons/' + k + '.JPG");}'
-
-/*
-const face1 = '.face' + k + '{background-image:url("/icons/' + k + '.JPG");' + `
-    width:  64px;  
-    height: 64px; 
-    border-radius: 50%;
-    background-position: left top; 
-    display:inline
+function Bar(props) {
+    return (
+        <p className="fixed-top">
+            <Navbar bg="light" expand="lg">
+                <Container fluid>
+                    <Navbar.Brand href="#">
+                        <img
+                            alt=""
+                            src="/logo192.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                        />MUIT APP</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                        <Nav
+                            className="me-auto my-2 my-lg-0"
+                            style={{ maxHeight: '100px' }}
+                            navbarScroll
+                        >
+                            <Nav.Link href="#action1">Home</Nav.Link>
+                            <Nav.Link href="#action2">MyPage</Nav.Link>
+                            <Nav.Link href="#action2">Rooms</Nav.Link>
+                        </Nav>
+                        <Form className="d-flex">
+                            <FormControl
+                                type="search"
+                                placeholder="Search"
+                                className="me-2"
+                                aria-label="Search"
+                            />
+                            <Button variant="outline-success">Search</Button>
+                        </Form>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </p>
+    )
 }
 
-`
-*/
-/*
-const faces = [25];
-for (var i = 0; i < 25; i++) {
-    faces.push('.face' + i + '{background-image:url("/icons/' + i + '.JPG");' + `
-    width:  64px;  
-    height: 64px; 
-    border-radius: 50%;
-    background-position: left top; 
-    display:inline}
-`)
-}
-*/
-
-function faceList() {
-    const faces = [];
-    for (var i = 0; i < 25; i++) {
-        faces.push('.face' + i + '{background-image:url("/icons/' + i + '.JPG");' + `
-        width:  64px;  
-        height: 64px; 
-        border-radius: 50%;
-        background-position: left top; 
-        display:inline}
-    `)
-    }
-
+function PostLists(props) {
     return (
 
-        faces.map(face => (
-            <style key={face}>{face}</style>
-        ))
-
-
-    );
+        <>
+            <Card>
+                <Card.Body>
+                    <Icon number={props.num} /><Card.Text class="inline">ID:{props.userid}</Card.Text>
+                    <Card.Title>{props.title}</Card.Title>
+                    <Row>
+                        <Col>
+                            <Card.Text className="inline">日時:{props.date}</Card.Text>
+                        </Col>
+                        <Col xs={6}>
+                            <Button className="inline" variant='outline-primary'>詳しく見る</Button>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
+            <p className='marginB' />
+        </>
+    )
 }
 
+function Icon(props) {//cname=className(cssを適用させるため) number=画像引っ張ってくるときi.jpgを選択する
+    var myName = 'icon' + props.number;
+    var thiscss = '.' + myName + '{background-image:url("/icons/' + props.number + '.JPG");' + `
+            width:  64px;  
+            height: 64px; 
+            border-radius: 50%;
+            background-position: left top; 
+            display:inline}
+        `
+    return (
+        <>
+            <style>{thiscss}</style><button key={myName} className={myName}></button>
+        </>
+    )
+};
 
 
-/*
-const icons = [];
-for (var j in 20) {
-    //exec (`const trim`+{j}+`= .trim`+{j}+`{background-image:url("/icons/`+{j}+`.JPG");}`);
-    icons[j] = `.trims` + { j } + `{background-image:url("/icons/` + { j } + `.JPG");}`;
-}
-*/
 
-const setClassName = (a) => {
-    return 'face' + a;
-}
+const getDatas = [
+    { 'roomid': "01", "userid": "user1", "date": "date1", "title": "記事1", "sentence": "中身１" },
+    { 'roomid': "02", "userid": "user2", "date": "date2", "title": "記事2", "sentence": "中身2" },
+    { 'roomid': "03", "userid": "user3", "date": "date3", "title": "記事3", "sentence": "中身3" },
+    { 'roomid': "04", "userid": "user4", "date": "date4", "title": "記事4", "sentence": "中身4" },
+    { 'roomid': "05", "userid": "user4", "date": "date4", "title": "一緒につりにいきたい人！！！！！", "sentence": "中身4" },
+
+]
