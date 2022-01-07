@@ -1,9 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-//import Card from 'react-bootstrap/Card';
-
-import { Button, Navbar, Stack, Container, Card, Form, FormControl, Row, Col, ListGroup, ListGroupItem, Nav, NavDropdown } from 'react-bootstrap';
-
-
+import { Button, Navbar, Card, Form, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
     //return <h2>Home</h2>
@@ -17,7 +12,7 @@ const Home = () => {
 
     list.push(<style>{bgcss}</style>);//壁紙の設定
     list.push(<style>{inputcss}</style>);
-    list.push(<><Bar /><ImgHeader path="/manyfriends.jpg" /></>)
+    list.push(<><ImgHeader path="/manyfriends.jpg" /></>)
 
 
 
@@ -85,47 +80,6 @@ const inputcss = ".inputcss" + '{' + `
     border: 2px solid #ddd;
     box-sizing: border-box;
 }`;
-
-
-function Bar(props) {
-    return (
-        <p className="fixed-top">
-            <Navbar bg="light" expand="lg">
-                <Container fluid>
-                    <Navbar.Brand href="#">
-                        <img
-                            alt=""
-                            src="/logo192.png"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />MUIT APP</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#action2">MyPage</Nav.Link>
-                            <Nav.Link href="#action2">Rooms</Nav.Link>
-                        </Nav>
-                        <Form className="d-flex">
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </p>
-    )
-}
 
 function PostLists(props) {
     return (

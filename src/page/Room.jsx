@@ -1,6 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import { Button, Navbar, Stack, Container, Card, Form, FormControl, Row, Col, ListGroup, ListGroupItem, Nav, NavDropdown } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 
 const Room = () => {
     var list = [];
@@ -18,8 +16,6 @@ export default Room
 function Blog(props) {
     return (
         <>
-            <Bar />
-
             <Card bg='success' text='light' border='secondary'>
                 <Card.Body>
                     <Card.Title as='h4'>{props.title}</Card.Title>
@@ -100,46 +96,6 @@ function BTitle(props) {
         ))
     )
 };*/
-
-function Bar(props) {
-    return (
-        <p className="fixed-top">
-            <Navbar bg="light" expand="lg">
-                <Container fluid>
-                    <Navbar.Brand href="#">
-                        <img
-                            alt=""
-                            src="/logo192.png"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />MUIT APP</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#action2">MyPage</Nav.Link>
-                            <Nav.Link href="#action2">Rooms</Nav.Link>
-                        </Nav>
-                        <Form className="d-flex">
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </p>
-    )
-}
 
 function BigImg(props) {
     return (
