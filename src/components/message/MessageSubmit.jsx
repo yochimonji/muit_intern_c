@@ -11,7 +11,7 @@ const MessageSubmit = (props) =>
                     value={props.text}
                     onChange={(e) => props.setText(e.target.value)}
                 />
-                <Button variant="outline-secondary" onClick={props.submitText} style={{height: 36}}>
+                <Button variant="secondary" onClick={props.submitText} style={{height: 36}}>
                     送信
                 </Button>
             </InputGroup>

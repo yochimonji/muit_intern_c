@@ -8,7 +8,7 @@ const MessageList = (props) =>
                 <Stack key={index} className="pb-2">
                     <div className="justify-content-end d-flex pb-1">{message.userid}</div>
                     <div className="d-flex justify-content-end">
-                        <div className="bg-dark text-light rounded border p-2 text-break">{message.text}</div>
+                        <div className="text-dark rounded border p-2 text-break" style={{backgroundColor: "#99f4ff"}}>{message.text}</div>
                     </div>
                 </Stack> :
                 <Stack key={index} className="pb-3">
