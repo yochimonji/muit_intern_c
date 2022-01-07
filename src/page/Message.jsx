@@ -21,19 +21,29 @@ const Message = () => {
                     "roomid": roomId
                 }
             })
-            const newMessageList = [...response.data.Items]
-            setMessageList(newMessageList)
+            console.log(response)
+            setMessageList([...response.data.Items])
         })();
     }, [])
 
-    const submitText = () => {
+    const submitText = async () => {
         if (!text) return
         // APIにテキストを送信する処理を追加する
-        setMessageList((prev) => [
-            ...prev,
-            { "text": text, "userid": currentUserId}
-        ])
-        setText("")
+        const response = await API.post(`/${roomId}/message/new`, {
+            "OperationType": "PUT",
+            "Keys": {
+                "roomid": roomId,
+                "text": text,
+                "userid": currentUserId,
+            }
+        })
+        if (response.status === 200) {
+            setMessageList((prev) => [
+                ...prev,
+                { "text": text, "userid": currentUserId}
+            ])
+            setText("")
+        }
     }
 
     return (
