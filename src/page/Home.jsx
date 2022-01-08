@@ -39,19 +39,32 @@ const Home = () => {
     }
 
     return (
-        <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
+        <div style={{ backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
+            {/* <ImgHeader path="/manyfriends.jpg" /> */}
 
             {/* 検索部分 */}
-            <InputGroup className='p-2'>
-                <Form.Control 
-                    className='inputcss' 
-                    type="text" 
-                    placeholder="絞り込み" 
-                    value={query} 
-                    onChange={(e) => setQuery(e.target.value)} 
-                />
-                <Button variant="secondary" onClick={handleClickSearch}>検索</Button>
-            </InputGroup>
+            <div>
+                <div style={{backgroundColor:"white"}}>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>キャンプ</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>コーヒー</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>料理</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>アウトドア</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>ツーリング</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>旅行</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>自転車</Button>                    
+                </div>
+                {/* 検索部分 */}
+                <InputGroup className='p-2'>
+                    <Form.Control 
+                        className='inputcss' 
+                        type="text" 
+                        placeholder="絞り込み" 
+                        value={query} 
+                        onChange={(e) => setQuery(e.target.value)} 
+                    />
+                    <Button variant="secondary" onClick={handleClickSearch}>検索</Button>
+                </InputGroup>
+            </div>
 
             {/* 各投稿 */}
             {roomDatas &&
@@ -107,10 +120,10 @@ function PostLists(props) {
         <>
             <Card>
                 <Card.Body>
-                    <Row><Col>
+                    <Row><Col xs={3}>
                         <Icon number={props.num} />
                     </Col>
-                        <Col>
+                        <Col xs={9} style={{ marginTop: '1rem' }}>
                             <Card.Title>{props.name}</Card.Title>
                         </Col>
 
@@ -155,6 +168,3 @@ function Icon(props) {//cname=className(cssを適用させるため) number=画�
         </>
     )
 };
-
-
-
