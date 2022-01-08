@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, Card } from 'react-bootstrap';
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 
 import API from '../api'
 
@@ -11,10 +11,9 @@ const Room = () => {
         sentence: "",
         userid: ""
     });
-    const history = useHistory()
-
-    // RoomIDは遷移元から取得する
-    const roomid = 1
+    const history = useHistory();
+    const location = useLocation();
+    const roomid = location.state.roomid
 
     useEffect(() => {
         (async () => {

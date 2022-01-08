@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Button, Navbar, Card, Form, Row, Col } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 import API from "../api"
 
 const Home = () => {
     const [roomDatas, setRoomDatas] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         (async () => {
@@ -12,6 +14,10 @@ const Home = () => {
             setRoomDatas([...response.data.Items])
         })();
     }, [])
+
+    const handleClick = (roomid) => {
+        history.push('/room', {roomid})
+    }
 
     return (
         <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
@@ -31,7 +37,7 @@ const Home = () => {
             {/* 各投稿 */}
             {roomDatas && 
                 roomDatas.map((inf, num) => 
-                    <PostLists roomid={inf.roomid} title={inf.title} userid={inf.userid} date={inf.date} sentence={inf.sentence} num={num} key={num}/>
+                    <PostLists {...inf} num={num} key={num} handleClick={handleClick} />
                 )
             }
         </div>
@@ -79,7 +85,6 @@ const inputcss = ".inputcss" + '{' + `
 
 function PostLists(props) {
     return (
-
         <>
             <Card>
                 <Card.Body>
@@ -87,10 +92,16 @@ function PostLists(props) {
                     <Card.Title>{props.title}</Card.Title>
                     <Row>
                         <Col>
-                            <Card.Text className="inline">日時:{props.date}</Card.Text>
+                            <Card.Text className="inline">日時:{String(props.date).slice(0, 10)}</Card.Text>
                         </Col>
                         <Col xs={6}>
-                            <Button className="inline" variant='outline-primary'>詳しく見る</Button>
+                            <Button 
+                                className="inline" 
+                                variant='outline-primary' 
+                                onClick={() => props.handleClick(props.roomid)}
+                            >
+                                詳しく見る
+                            </Button>
                         </Col>
                     </Row>
                 </Card.Body>

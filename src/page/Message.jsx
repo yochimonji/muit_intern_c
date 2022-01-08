@@ -10,7 +10,7 @@ const Message = () => {
     const [text, setText] = useState("");
 
     const location = useLocation();
-    const roomId = location.state.roomid
+    const roomId = Number(location.state.roomid)
 
     // 現在のユーザーをuseContextを使用する
     const currentUserId = "user1";
