@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Button, Navbar, Card, Form, Row, Col } from 'react-bootstrap';
+import { Button, Card, Form, Row, Col, InputGroup } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import API from "../api"
 
 const Home = () => {
     const [roomDatas, setRoomDatas] = useState([]);
+    const [query, setQuery] = useState("");
     const history = useHistory();
 
     useEffect(() => {
@@ -19,20 +20,38 @@ const Home = () => {
         history.push('/room', { roomid })
     }
 
+    const handleClickSearch = () => {
+        (async () => {
+            if (query) {
+                const response = await API.post(`/`, {
+                    "OperationType": "QUERY",
+                    "Keys": {
+                        "tag": query
+                    }
+                })
+                setRoomDatas([...response.data.Items])
+            }
+            else {
+                const response = await API.post(`/`, { "OperationType": "SCAN" })
+                setRoomDatas([...response.data.Items])
+            }
+        })();
+    }
+
     return (
         <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
-            {/* <ImgHeader path="/manyfriends.jpg" /> */}
 
             {/* 検索部分 */}
-            <div>
-                <Form><Form.Control className='inputcss' type="email" placeholder="絞り込み" /></Form>
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand>
-                        <Button variant="secondary">Submit</Button>
-                        <Button variant="outline-danger">Reset</Button>
-                    </Navbar.Brand>
-                </Navbar>
-            </div>
+            <InputGroup className='p-2'>
+                <Form.Control 
+                    className='inputcss' 
+                    type="text" 
+                    placeholder="絞り込み" 
+                    value={query} 
+                    onChange={(e) => setQuery(e.target.value)} 
+                />
+                <Button variant="secondary" onClick={handleClickSearch}>検索</Button>
+            </InputGroup>
 
             {/* 各投稿 */}
             {roomDatas &&

@@ -16,7 +16,6 @@ const Message = () => {
     const roomId = Number(location.state.roomid)
 
     const currentUserId = useContext(UserContext)
-    console.log(currentUserId)
 
     useEffect(()=>{
         (async () => {
