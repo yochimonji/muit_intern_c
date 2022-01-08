@@ -25,25 +25,22 @@ const Home = () => {
 
             {/* 検索部分 */}
             <div>
+                <div>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>キャンプ</Button>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>コーヒー</Button>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>料理</Button>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>アウトドア</Button>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>ツーリング</Button>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>旅行</Button>
+                    <Button variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>自転車</Button>                    
+                </div>
                 <Form><Form.Control className='inputcss' type="email" placeholder="絞り込み" /></Form>                
-                
                 <Navbar bg="light" variant="light">                    
                     <Navbar.Brand>
                         <Button variant="secondary">Submit</Button>
                         <Button variant="outline-danger">Reset</Button>
                     </Navbar.Brand>
                 </Navbar>
-                <div style={{                        
-                        backgroundColor: 'transparent',
-                    }}>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>キャンプ</Button>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>コーヒー</Button>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>料理</Button>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>アウトドア</Button>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>ツーリング</Button>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>旅行</Button>
-                    <Button pill variant="dark" style={{'margin':'6px', 'padding':'4px', 'font-size':'14px'}}>自転車</Button>                    
-                </div>
             </div>
 
             {/* 各投稿 */}
