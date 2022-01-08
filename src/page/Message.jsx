@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 import { MessageList, MessageSubmit } from "../components";
 import API from '../api'
-import { useLocation } from "react-router-dom";
+import { UserContext } from "../App";
+
+// import { UserContext } from "./SignIn";
 
 const Message = () => {
     const [messageList, setMessageList] = useState([]);
@@ -12,8 +15,8 @@ const Message = () => {
     const location = useLocation();
     const roomId = Number(location.state.roomid)
 
-    // 現在のユーザーをuseContextを使用する
-    const currentUserId = "user1";
+    const currentUserId = useContext(UserContext)
+    console.log(currentUserId)
 
     useEffect(()=>{
         (async () => {
