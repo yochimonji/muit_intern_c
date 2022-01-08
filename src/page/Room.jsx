@@ -14,6 +14,7 @@ const Room = () => {
     const history = useHistory();
     const location = useLocation();
     const roomid = location.state.roomid
+    const num = location.state.num
 
     useEffect(() => {
         (async () => {
@@ -50,7 +51,7 @@ const Room = () => {
                 </Card.Body>
 
                 <Card.Header> 詳細</Card.Header>
-                <Card.Body><Icon cname='testicon0' number='0' />ID:{roomData.userid}</Card.Body>
+                <Card.Body><Icon cname='testicon0' number={num} />ID:{roomData.userid}</Card.Body>
             </Card>
             <Card className='text-center'>
                 <Card.Body>

@@ -16,8 +16,8 @@ const Home = () => {
         })();
     }, [])
 
-    const handleClick = (roomid) => {
-        history.push('/room', { roomid })
+    const handleClick = (roomid, num) => {
+        history.push('/room', { roomid, num })
     }
 
     const handleClickSearch = () => {
@@ -127,7 +127,7 @@ function PostLists(props) {
                             <Button
                                 className="inline"
                                 variant='outline-primary'
-                                onClick={() => props.handleClick(props.roomid)}
+                                onClick={() => props.handleClick(props.roomid, props.num)}
                             >
                                 詳しく見る
                             </Button>
