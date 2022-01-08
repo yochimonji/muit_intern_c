@@ -16,11 +16,11 @@ const Home = () => {
     }, [])
 
     const handleClick = (roomid) => {
-        history.push('/room', {roomid})
+        history.push('/room', { roomid })
     }
 
     return (
-        <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
+        <div style={{ backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
             <ImgHeader path="/manyfriends.jpg" />
 
             {/* 検索部分 */}
@@ -35,8 +35,8 @@ const Home = () => {
             </div>
 
             {/* 各投稿 */}
-            {roomDatas && 
-                roomDatas.map((inf, num) => 
+            {roomDatas &&
+                roomDatas.map((inf, num) =>
                     <PostLists {...inf} num={num} key={num} handleClick={handleClick} />
                 )
             }
@@ -88,16 +88,25 @@ function PostLists(props) {
         <>
             <Card>
                 <Card.Body>
-                    <Icon number={props.num} /><Card.Text className="inline">ID:{props.userid}</Card.Text>
+                    <Row><Col>
+                        <Icon number={props.num} /><Card.Text className="inline">ID:{props.userid}</Card.Text>
+
+                    </Col>
+                        <Col>
+                            <Card.Title>{props.name}</Card.Title>
+                        </Col>
+
+                    </Row>
                     <Card.Title>{props.title}</Card.Title>
                     <Row>
                         <Col>
                             <Card.Text className="inline">日時:{String(props.date).slice(0, 10)}</Card.Text>
+                            <Card.Text className="inline">tag:<a href='#sample'>#{String(props.tag).slice(0, 10)}</a></Card.Text>
                         </Col>
                         <Col xs={6}>
-                            <Button 
-                                className="inline" 
-                                variant='outline-primary' 
+                            <Button
+                                className="inline"
+                                variant='outline-primary'
                                 onClick={() => props.handleClick(props.roomid)}
                             >
                                 詳しく見る
