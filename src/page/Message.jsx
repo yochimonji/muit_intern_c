@@ -23,14 +23,17 @@ const Message = () => {
                     "roomid": roomId
                 }
             })
-            setMessageList([...response.data.Items])
+            const sortedItems = response.data.Items.sort((a, b) => {
+                return (a.date < b.date) ? -1 : 1
+            })
+            setMessageList([...sortedItems])
         })();
     }, [])
 
     const submitText = async () => {
         if (!text) return
         // APIにテキストを送信する処理を追加する
-        const response = await API.post(`/${roomId}/message/new`, {
+        const postMessageResponse = await API.post(`/${roomId}/message/new`, {
             "OperationType": "PUT",
             "Keys": {
                 "roomid": roomId,
@@ -38,13 +41,20 @@ const Message = () => {
                 "userid": currentUserId,
             }
         })
-        if (response.status === 200) {
-            setMessageList((prev) => [
-                ...prev,
-                { "text": text, "userid": currentUserId}
-            ])
-            setText("")
-        }
+        if (postMessageResponse.status !== 200) return
+
+        const fetchMessageListResponse = await API.post(`/${roomId}/message`, {
+            "OperationType": "QUERY",
+            "Keys": {
+                "roomid": roomId
+            }
+        })
+        const sortedItems = fetchMessageListResponse.data.Items.sort((a, b) => {
+            return (a.date < b.date) ? -1 : 1
+        })
+        setMessageList([...sortedItems])
+        setText("")
+        
     }
 
     return (
