@@ -1,45 +1,41 @@
+import { useEffect, useState } from 'react';
 import { Button, Navbar, Card, Form, Row, Col } from 'react-bootstrap';
 
+import API from "../api"
+
 const Home = () => {
-    //return <h2>Home</h2>
-    //return <h2>{to_json[0].sentence}</h2>   //to_json[0].sentence　もしくは　to_json[0]['sentense']で可能
+    const [roomDatas, setRoomDatas] = useState([]);
 
-    var list = [];
+    useEffect(() => {
+        (async () => {
+            const response = await API.post(`/`, { "OperationType": "SCAN" })
+            setRoomDatas([...response.data.Items])
+        })();
+    }, [])
 
-    list.push(<style>{inline}{marginB}</style>);//{iconcss}
+    return (
+        <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
+            <ImgHeader path="/manyfriends.jpg" />
 
-    var bgcss = 'body {background-image: url("/defaltback.jpg");background-size: cover;background-attachment: fixed;}';
+            {/* 検索部分 */}
+            <div>
+                <Form><Form.Control className='inputcss' type="email" placeholder="絞り込み" /></Form>
+                <Navbar bg="light" variant="light">
+                    <Navbar.Brand>
+                        <Button variant="secondary">Submit</Button>
+                        <Button variant="outline-danger">Reset</Button>
+                    </Navbar.Brand>
+                </Navbar>
+            </div>
 
-    list.push(<style>{bgcss}</style>);//壁紙の設定
-    list.push(<style>{inputcss}</style>);
-    list.push(<><ImgHeader path="/manyfriends.jpg" /></>)
-
-
-
-    //検索欄
-    list.push(
-
-        <span className="inline" >
-            <Form><Form.Control className='inputcss' type="email" placeholder="絞り込み" /></Form>
-            <Navbar bg="light" variant="light">
-                <Navbar.Brand>
-                    <Button variant="secondary">Submit</Button>
-                    <Button variant="outline-danger">Reset</Button>
-                </Navbar.Brand>
-            </Navbar>
-        </span>
-
-    );
-
-
-    //各投稿
-    var listB = getDatas.map((inf, num) => {
-        return <PostLists roomid={inf.roomid} title={inf.title} userid={inf.userid} date={inf.date} sentence={inf.sentence} num={num} />
-    });
-
-    list.push(
-        <>{listB}</>)
-    return list
+            {/* 各投稿 */}
+            {roomDatas && 
+                roomDatas.map((inf, num) => 
+                    <PostLists roomid={inf.roomid} title={inf.title} userid={inf.userid} date={inf.date} sentence={inf.sentence} num={num} key={num}/>
+                )
+            }
+        </div>
+    )
 }
 
 
@@ -87,7 +83,7 @@ function PostLists(props) {
         <>
             <Card>
                 <Card.Body>
-                    <Icon number={props.num} /><Card.Text class="inline">ID:{props.userid}</Card.Text>
+                    <Icon number={props.num} /><Card.Text className="inline">ID:{props.userid}</Card.Text>
                     <Card.Title>{props.title}</Card.Title>
                     <Row>
                         <Col>
@@ -121,12 +117,3 @@ function Icon(props) {//cname=className(cssを適用させるため) number=画�
 };
 
 
-
-const getDatas = [
-    { 'roomid': "01", "userid": "user1", "date": "date1", "title": "記事1", "sentence": "中身１" },
-    { 'roomid': "02", "userid": "user2", "date": "date2", "title": "記事2", "sentence": "中身2" },
-    { 'roomid': "03", "userid": "user3", "date": "date3", "title": "記事3", "sentence": "中身3" },
-    { 'roomid': "04", "userid": "user4", "date": "date4", "title": "記事4", "sentence": "中身4" },
-    { 'roomid': "05", "userid": "user4", "date": "date4", "title": "一緒につりにいきたい人！！！！！", "sentence": "中身4" },
-
-]
