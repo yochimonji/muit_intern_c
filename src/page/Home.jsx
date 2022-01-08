@@ -20,7 +20,7 @@ const Home = () => {
     }
 
     return (
-        <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
+        <div style={{ backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
             {/* <ImgHeader path="/manyfriends.jpg" /> */}
 
             {/* 検索部分 */}
@@ -88,10 +88,10 @@ function PostLists(props) {
         <>
             <Card>
                 <Card.Body>
-                    <Row><Col>
+                    <Row><Col xs={3}>
                         <Icon number={props.num} />
                     </Col>
-                        <Col>
+                        <Col xs={9} style={{ marginTop: '1rem' }}>
                             <Card.Title>{props.name}</Card.Title>
                         </Col>
 
