@@ -23,9 +23,8 @@ const Header = () => {
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Nav.Link href="#action1">Home</Nav.Link>
-                                <Nav.Link href="#action2">MyPage</Nav.Link>
-                                <Nav.Link href="#action2">Rooms</Nav.Link>
+                                <Nav.Link href="/">Home</Nav.Link>
+                                <Nav.Link href="/signin">Sign out</Nav.Link>
                             </Nav>
                             <Form className="d-flex">
                                 <FormControl
@@ -34,7 +33,7 @@ const Header = () => {
                                     className="me-2"
                                     aria-label="Search"
                                 />
-                                <Button variant="outline-success">Search</Button>
+                                <Button variant="outline-info">Search</Button>
                             </Form>
                         </Navbar.Collapse>
                     </Container>
