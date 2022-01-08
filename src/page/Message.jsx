@@ -67,7 +67,6 @@ const Message = () => {
         const sortedItems = response.data.Items.sort((a, b) => {
             return (a.date < b.date) ? -1 : 1
         })
-        console.log(sortedItems)
         setMessageList([...sortedItems])
     }
 

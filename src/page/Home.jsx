@@ -143,10 +143,10 @@ function PostLists(props) {
                     <Card.Text className="inline">ID:{props.userid}</Card.Text>
                     <Card.Title>{props.title}</Card.Title>
 
-                    <Card.Text className="inline">日時:{String(props.date).slice(0, 10)}</Card.Text>
+                    <Card.Text className="inline">{String(props.date).slice(0, 10)}</Card.Text>
                     <Row>
                         <Col>
-                            <Card.Text className="inline">tag:<a href='#sample'>#{String(props.tag).slice(0, 10)}</a></Card.Text>
+                            <Card.Text className="inline"><a href='#sample'>#{String(props.tag).slice(0, 10)}</a></Card.Text>
                         </Col>
                         <Col xs={6}>
                             <Button
