@@ -3,15 +3,17 @@ import { Container } from "react-bootstrap";
 
 import { MessageList, MessageSubmit } from "../components";
 import API from '../api'
+import { useLocation } from "react-router-dom";
 
 const Message = () => {
     const [messageList, setMessageList] = useState([]);
     const [text, setText] = useState("");
 
+    const location = useLocation();
+    const roomId = location.state.roomid
+
     // 現在のユーザーをuseContextを使用する
-    const currentUserId = "userA";
-    // RoomIDは遷移元から取得する
-    const roomId = 1;
+    const currentUserId = "user1";
 
     useEffect(()=>{
         (async () => {
@@ -21,7 +23,6 @@ const Message = () => {
                     "roomid": roomId
                 }
             })
-            console.log(response)
             setMessageList([...response.data.Items])
         })();
     }, [])
