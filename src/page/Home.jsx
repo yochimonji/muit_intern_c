@@ -25,14 +25,14 @@ const Home = () => {
 
             {/* 検索部分 */}
             <div>
-                <div>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>キャンプ</Button>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>コーヒー</Button>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>料理</Button>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>アウトドア</Button>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>ツーリング</Button>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>旅行</Button>
-                    <Button variant="light" style={{'margin':'6px', 'padding':'4px', 'font-size':'12px'}}>自転車</Button>                    
+                <div style={{backgroundColor:"white"}}>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>キャンプ</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>コーヒー</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>料理</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>アウトドア</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>ツーリング</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>旅行</Button>
+                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>自転車</Button>                    
                 </div>
                 <Form><Form.Control className='inputcss' type="email" placeholder="絞り込み" /></Form>                
                 <Navbar bg="light" variant="light">                    
