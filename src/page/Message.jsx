@@ -6,8 +6,6 @@ import { MessageList, MessageSubmit } from "../components";
 import API from '../api'
 import { UserContext } from "../App";
 
-// import { UserContext } from "./SignIn";
-
 const Message = () => {
     const [messageList, setMessageList] = useState([]);
     const [text, setText] = useState("");
@@ -59,10 +57,24 @@ const Message = () => {
         
     }
 
+    const handleReload = async () => {
+        const response = await API.post(`/${roomId}/message`, {
+            "OperationType": "QUERY",
+            "Keys": {
+                "roomid": roomId
+            }
+        })
+        const sortedItems = response.data.Items.sort((a, b) => {
+            return (a.date < b.date) ? -1 : 1
+        })
+        console.log(sortedItems)
+        setMessageList([...sortedItems])
+    }
+
     return (
         <Container>
             <MessageList messageList={messageList} currentUserId={currentUserId} />
-            <MessageSubmit text={text} setText={setText} submitText={submitText} />
+            <MessageSubmit text={text} setText={setText} submitText={submitText} handleReload={handleReload} />
         </Container>
     )
 }
