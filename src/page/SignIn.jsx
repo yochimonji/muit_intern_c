@@ -55,7 +55,7 @@ class SignIn extends Component {
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>userID</Form.Label>
-                        <Form.Control type='text' value={this.state.text} onChange={this.handleChange} placeholder="Enter email" />
+                        <Form.Control type='text' value={this.state.text} onChange={this.handleChange} placeholder="Enter userID" />
                         <Form.Text className="text-muted">
                             このIDはこのサービス内でのみ利用されます.
                         </Form.Text>
@@ -67,7 +67,6 @@ class SignIn extends Component {
                     </Form.Group>
                 </Form>
 
-                <br /><br /><br /><br /><br /><br /><br />
 
 
 
@@ -93,8 +92,6 @@ class SignIn extends Component {
 
             </>
 
-
-
         ]
 
     }
@@ -102,7 +99,7 @@ class SignIn extends Component {
 
 }
 
-const right = '.right {text - align: right;}';
+const right = '.right{text-align:right;}';
 
 export default withRouter(SignIn)
 
