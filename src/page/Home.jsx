@@ -21,7 +21,7 @@ const Home = () => {
 
     return (
         <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
-            <ImgHeader path="/manyfriends.jpg" />
+            {/* <ImgHeader path="/manyfriends.jpg" /> */}
 
             {/* 検索部分 */}
             <div>
