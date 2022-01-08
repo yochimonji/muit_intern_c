@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Card, Form, Row, Col, InputGroup } from 'react-bootstrap';
+import { Button, Card, Form, Row, Col, InputGroup, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import API from "../api"
@@ -8,6 +8,8 @@ const Home = () => {
     const [roomDatas, setRoomDatas] = useState([]);
     const [query, setQuery] = useState("");
     const history = useHistory();
+
+    const queryButtonList = ["キャンプ", "コーヒー", "料理", "アウトドア", "ツーリング", "旅行", "自転車"]
 
     useEffect(() => {
         (async () => {
@@ -20,40 +22,50 @@ const Home = () => {
         history.push('/room', { roomid, num })
     }
 
-    const handleClickSearch = () => {
-        (async () => {
-            if (query) {
-                const response = await API.post(`/`, {
-                    "OperationType": "QUERY",
-                    "Keys": {
-                        "tag": query
-                    }
-                })
-                setRoomDatas([...response.data.Items])
+    const handleClickSearch = async () => {
+        if (query) {
+            const response = await API.post(`/`, {
+                "OperationType": "QUERY",
+                "Keys": {
+                    "tag": query
+                }
+            })
+            setRoomDatas([...response.data.Items])
+        }
+        else {
+            const response = await API.post(`/`, { "OperationType": "SCAN" })
+            setRoomDatas([...response.data.Items])
+        }
+    }
+
+    const handleClickQueryButton = async (query) => {
+        setQuery(query)
+        const response = await API.post(`/`, {
+            "OperationType": "QUERY",
+            "Keys": {
+                "tag": query
             }
-            else {
-                const response = await API.post(`/`, { "OperationType": "SCAN" })
-                setRoomDatas([...response.data.Items])
-            }
-        })();
+        })
+        setRoomDatas([...response.data.Items])
     }
 
     return (
         <div style={{ backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
-            {/* <ImgHeader path="/manyfriends.jpg" /> */}
-
             {/* 検索部分 */}
             <div>
-                <div style={{backgroundColor:"white"}}>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>キャンプ</Button>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>コーヒー</Button>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>料理</Button>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>アウトドア</Button>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>ツーリング</Button>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>旅行</Button>
-                    <Button variant="light" style={{'margin':'4px', 'padding':'3px', 'font-size':'14px'}}>自転車</Button>                    
-                </div>
-                {/* 検索部分 */}
+                <Container className='bg-white py-2'>
+                    {queryButtonList.map((queryButton, index) => 
+                        <Button 
+                            variant="light" 
+                            className='m-1 p-1' 
+                            style={{fontSize: "14px"}} 
+                            key={index}
+                            onClick={() => handleClickQueryButton(queryButton)}
+                        >
+                            {queryButton}
+                        </Button>
+                    )}                  
+                </Container>
                 <InputGroup className='p-2'>
                     <Form.Control 
                         className='inputcss' 
