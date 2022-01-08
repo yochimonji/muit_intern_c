@@ -16,12 +16,12 @@ const Home = () => {
     }, [])
 
     const handleClick = (roomid) => {
-        history.push('/room', {roomid})
+        history.push('/room', { roomid })
     }
 
     return (
-        <div style={{backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed"}}>
-            <ImgHeader path="/manyfriends.jpg" />
+        <div style={{ backgroundImage: "url(/defaltback.jpg)", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
+            {/* <ImgHeader path="/manyfriends.jpg" /> */}
 
             {/* 検索部分 */}
             <div>
@@ -44,8 +44,8 @@ const Home = () => {
             </div>
 
             {/* 各投稿 */}
-            {roomDatas && 
-                roomDatas.map((inf, num) => 
+            {roomDatas &&
+                roomDatas.map((inf, num) =>
                     <PostLists {...inf} num={num} key={num} handleClick={handleClick} />
                 )
             }
@@ -97,16 +97,26 @@ function PostLists(props) {
         <>
             <Card>
                 <Card.Body>
-                    <Icon number={props.num} /><Card.Text className="inline">ID:{props.userid}</Card.Text>
+                    <Row><Col xs={3}>
+                        <Icon number={props.num} />
+                    </Col>
+                        <Col xs={9} style={{ marginTop: '1rem' }}>
+                            <Card.Title>{props.name}</Card.Title>
+                        </Col>
+
+                    </Row>
+                    <Card.Text className="inline">ID:{props.userid}</Card.Text>
                     <Card.Title>{props.title}</Card.Title>
+
+                    <Card.Text className="inline">日時:{String(props.date).slice(0, 10)}</Card.Text>
                     <Row>
                         <Col>
-                            <Card.Text className="inline">日時:{String(props.date).slice(0, 10)}</Card.Text>
+                            <Card.Text className="inline">tag:<a href='#sample'>#{String(props.tag).slice(0, 10)}</a></Card.Text>
                         </Col>
                         <Col xs={6}>
-                            <Button 
-                                className="inline" 
-                                variant='outline-primary' 
+                            <Button
+                                className="inline"
+                                variant='outline-primary'
                                 onClick={() => props.handleClick(props.roomid)}
                             >
                                 詳しく見る
@@ -135,5 +145,6 @@ function Icon(props) {//cname=className(cssを適用させるため) number=画�
         </>
     )
 };
+
 
 
